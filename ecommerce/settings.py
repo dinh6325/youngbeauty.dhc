@@ -3,6 +3,10 @@ import os
 from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+DEBUG = False
 
 
 SECRET_KEY = 'django-insecure-@rv6jw!0t&85@ct^33r03xhg*vwe^ji=ts0ow5st6zq-7g=_)f'
@@ -115,6 +119,7 @@ LOGOUT_REDIRECT_URL = 'login'
 LOGIN_REDIRECT_URL = '/admin/products/'
 
 
+
 PAYMENT_CONFIG = {
     "CLIENT_ID": "7eefa141-d3e4-4f92-a1bf-eaa6e7081a75",
     "API_KEY": "b1841452-8e97-4ccd-9897-0004a5c47f3a",
@@ -122,3 +127,13 @@ PAYMENT_CONFIG = {
     "BASE_URL": "https://sandbox.example.com/api/payment",  # đổi sang URL thật theo docs của cổng
     "WEBHOOK_URL": "http://127.0.0.1:8000/payments/webhook/",  # local callback
 }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
+    }
+ }

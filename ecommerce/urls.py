@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('shop.urls')),
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
+    path("payments/", include("payments.urls")),
 ]
 
 # Cho phép phục vụ media files (chỉ khi DEBUG=True)

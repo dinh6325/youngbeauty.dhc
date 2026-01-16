@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+<div class="container my-5">
+  <h2>Trạng thái đơn hàng #{{ order.id }}</h2>
+  <div class="order-status mt-4">
+    <ul class="progressbar">
+      <li class="{% if order.status == 'placed' or order.status == 'processing' or order.status == 'shipping' or order.status == 'delivered' %}active{% endif %}">Đã đặt</li>
+      <li class="{% if order.status == 'processing' or order.status == 'shipping' or order.status == 'delivered' %}active{% endif %}">Đang xử lý</li>
+      <li class="{% if order.status == 'shipping' or order.status == 'delivered' %}active{% endif %}">Đang giao</li>
+      <li class="{% if order.status == 'delivered' %}active{% endif %}">Giao thành công</li>
+    </ul>
+  </div>
+  <a href="{% url 'shop:home' %}" class="btn btn-primary mt-4">Quay lại trang chủ</a>
+
+  <h3 class="mt-5">Sản phẩm đã mua</h3>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Tên sản phẩm</th>
+        <th>Số lượng</th>
+        <th>Giá</th>
+        <th>Tổng cộng</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order_items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.price|floatformat:0|intcomma }} ₫</td>
+        <td>{{ item.total|floatformat:0|intcomma }} ₫</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .progressbar {
+    counter-reset: step;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+    list-style-type: none;
+  }
+  .progressbar li {
+    position: relative;
+    text-align: center;
+    flex: 1;
+    color: #bbb;
+  }
+  .progressbar li.active {
+    color: #28a745;
+    font-weight: bold;
+  }
+  .progressbar li::before {
+    content: counter(step);
+    counter-increment: step;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border: 2px solid #bbb;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    border-radius: 50%;
+    background-color: white;
+  }
+  .progressbar li.active::before {
+    border-color: #28a745;
+    background-color: #28a745;
+    color: white;
+  }
+  .progressbar li::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #bbb;
+    top: 15px;
+    left: -50%;
+    z-index: -1;
+  }
+  .progressbar li:first-child::after {
+    content: none;
+  }
+  .progressbar li.active::after {
+    background-color: #28a745;
+  }
+</style>
+{% endblock %}

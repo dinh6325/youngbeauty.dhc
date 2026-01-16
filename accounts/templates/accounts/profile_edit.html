@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <!-- Edit Profile Card -->
+      <div class="card shadow-sm border-0" style="border-radius: 15px; background: #ffffff;">
+        <div class="card-body p-4">
+          <!-- Header with Title -->
+          <h2 class="mb-4" style="color: #2d3748; font-weight: 700;">Edit Profile</h2>
+
+          <!-- Messages -->
+          {% if messages %}
+            <div class="mb-4">
+              {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% else %}alert-{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <!-- Form -->
+          <form method="post" enctype="multipart/form-data" id="profile-form">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <!-- Avatar Preview and Upload -->
+            <div class="mb-4 text-center">
+              <div class="avatar-preview-container">
+                {% if user.avatar %}
+                  <img id="avatar-preview" 
+                       src="{{ user.avatar.url }}" 
+                       alt="{{ user.username }}'s avatar" 
+                       class="rounded-circle mb-3" 
+                       style="width: 100px; height: 100px; object-fit: cover; border: 3px solid #d4a017;">
+                {% else %}
+                  <div id="avatar-preview" 
+                       class="d-flex justify-content-center align-items-center rounded-circle mb-3"
+                       style="width: 100px; height: 100px; background-color: #f0f0f0; border: 3px solid #d4a017;">
+                    <i class="bi bi-person-circle" style="font-size: 3rem; color: #a0a0a0;"></i>
+                  </div>
+                {% endif %}
+              </div>
+              <div class="input-group">
+                <label for="{{ form.avatar.id_for_label }}" class="form-label w-100" style="color: #2d3748; font-weight: 600;">
+                  {{ form.avatar.label }}
+                </label>
+                <input type="file" 
+                       class="form-control" 
+                       id="{{ form.avatar.id_for_label }}" 
+                       name="{{ form.avatar.name }}" 
+                       accept="image/png, image/jpeg, image/jpg" 
+                       onchange="previewAvatar(event)">
+                {% if form.avatar.errors %}
+                  <div class="text-danger small">{{ form.avatar.errors }}</div>
+                {% endif %}
+              </div>
+              {% if user.avatar %}
+                <div class="mt-2">
+                  <button type="button" 
+                          class="btn btn-outline-danger btn-sm" 
+                          onclick="deleteAvatar()">Remove Avatar</button>
+                </div>
+              {% endif %}
+            </div>
+
+            <!-- Form Fields -->
+            {% for field in form %}
+              {% if field.name != 'avatar' %}
+                <div class="mb-3">
+                  <label for="{{ field.id_for_label }}" class="form-label" style="color: #2d3748; font-weight: 600;">
+                    {{ field.label }}
+                  </label>
+                  <div class="input-group">
+                    {% if field.name == 'username' %}
+                      <span class="input-group-text" style="background: #edf2f7; border-color: #cbd5e0;">
+                        <i class="bi bi-person-fill" style="color: #2b6cb0;"></i>
+                      </span>
+                    {% elif field.name == 'email' %}
+                      <span class="input-group-text" style="background: #edf2f7; border-color: #cbd5e0;">
+                        <i class="bi bi-envelope-fill" style="color: #2b6cb0;"></i>
+                      </span>
+                    {% elif field.name == 'phone' %}
+                      <span class="input-group-text" style="background: #edf2f7; border-color: #cbd5e0;">
+                        <i class="bi bi-telephone-fill" style="color: #2b6cb0;"></i>
+                      </span>
+                    {% endif %}
+                    {{ field }}
+                  </div>
+                  {% if field.errors %}
+                    <div class="text-danger small">{{ field.errors }}</div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-center gap-3">
+              <button type="submit" 
+                      class="btn btn-primary" 
+                      style="background: linear-gradient(90deg, #d4a017, #f1c40f); border: none; color: #1e2a44; font-weight: 600; padding: 0.75rem 2rem; border-radius: 0.5rem; transition: all 0.3s ease;">
+                Save
+              </button>
+              <a href="{% url 'user_profile' %}" 
+                 class="btn btn-secondary" 
+                 style="background: #4a5568; border: none; color: #f1f5f9; font-weight: 600; padding: 0.75rem 2rem; border-radius: 0.5rem; transition: all 0.3s ease;">
+                Cancel
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+  }
+
+  .form-control, .form-control-file {
+    border-radius: 0.5rem;
+    border: 1px solid #cbd5e0;
+    background: #edf2f7;
+    transition: all 0.2s ease;
+  }
+
+  .form-control:focus {
+    border-color: #2b6cb0;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(43, 108, 176, 0.1);
+  }
+
+  .input-group-text {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
+  .btn-primary:hover, .btn-secondary:hover, .btn-outline-danger:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .avatar-preview-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  #avatar-preview.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 576px) {
+    .card-body {
+      padding: 2rem 1.5rem;
+    }
+
+    .btn-primary, .btn-secondary, .btn-outline-danger {
+      width: 100%;
+    }
+
+    .d-flex.gap-3 {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Real-time avatar preview
+  function previewAvatar(event) {
+    const input = event.target;
+    const preview = document.getElementById('avatar-preview');
+    const file = input.files[0];
+    
+    // Validate file type
+    const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    if (!validTypes.includes(file.type)) {
+      alert('Please upload a valid image (PNG, JPEG, or JPG).');
+      input.value = '';
+      return;
+    }
+
+    // Validate file size (e.g., max 5MB)
+    const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+    if (file.size > maxSize) {
+      alert('Image size must be less than 5MB.');
+      input.value = '';
+      return;
+    }
+
+    // Show preview
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      preview.classList.remove('d-flex', 'justify-content-center', 'align-items-center');
+      preview.style.backgroundColor = 'transparent';
+      preview.innerHTML = '';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // Delete avatar
+  function deleteAvatar() {
+    if (confirm('Are you sure you want to remove your avatar?')) {
+      const form = document.getElementById('profile-form');
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'delete_avatar';
+      input.value = 'true';
+      form.appendChild(input);
+      form.submit();
+    }
+  }
+</script>
+{% endblock %}

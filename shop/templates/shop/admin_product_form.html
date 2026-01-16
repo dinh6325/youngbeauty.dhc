@@ -2,16 +2,160 @@
 
 {% block content %}
 <div class="container my-5">
+  <style>
+    /* Container styling */
+    .container.my-5 {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 25px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form heading */
+    h1 {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    /* Form group styling */
+    .mb-3 {
+      margin-bottom: 1.75rem !important;
+    }
+
+    .mb-2 {
+      margin-bottom: 1.25rem !important;
+    }
+
+    /* Form labels */
+    label {
+      font-weight: 600;
+      color: #34495e;
+      margin-bottom: 0.5rem;
+      display: block;
+      font-size: 1rem;
+    }
+
+    /* Form inputs */
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.85rem;
+      border: 1px solid #dfe6e9;
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #f9fbfc;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #27ae60;
+      box-shadow: 0 0 8px rgba(39, 174, 96, 0.2);
+      transform: scale(1.01);
+    }
+
+    /* File input styling */
+    input[type="file"] {
+      padding: 0.5rem;
+      border: 1px solid #dfe6e9;
+      border-radius: 6px;
+      background-color: #f9fbfc;
+      font-size: 0.95rem;
+    }
+
+    /* Error messages */
+    .errorlist {
+      color: #e74c3c;
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+      list-style: none;
+      padding: 0;
+      font-weight: 500;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.85rem 2rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+      margin-right: 0.5rem;
+    }
+
+    .btn-success {
+      background-color: #27ae60;
+      border-color: #27ae60;
+    }
+
+    .btn-success:hover {
+      background-color: #219653;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: #7f8c8d;
+      border-color: #7f8c8d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #6c7778;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(127, 140, 141, 0.3);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+      .container.my-5 {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .btn {
+        width: 100%;
+        margin-bottom: 0.75rem;
+        margin-right: 0;
+      }
+    }
+  </style>
+
   {% if product %}
     <h1>Chỉnh sửa sản phẩm</h1>
-    {% comment %}Nếu bạn muốn set explicit action, uncomment dòng sau{% endcomment %}
-    {# <form method="post" enctype="multipart/form-data" action="{% url 'admin_product_update' product.pk %}"> #}
+    <form method="post" enctype="multipart/form-data" action="{% url 'shop:admin_product_update' product.pk %}">
   {% else %}
     <h1>Thêm sản phẩm mới</h1>
-    {# <form method="post" enctype="multipart/form-data" action="{% url 'admin_product_create' %}"> #}
+    <form method="post" enctype="multipart/form-data" action="{% url 'shop:admin_product_create' %}">
   {% endif %}
 
-  <form method="post" enctype="multipart/form-data">
+  {% if messages %}
+    <div>
+      {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
     {% csrf_token %}
     <div class="mb-3">
       {{ form.non_field_errors }}
@@ -24,7 +168,7 @@
       {% endfor %}
     </div>
     <button type="submit" class="btn btn-success">Lưu</button>
-    <a href="{% url 'admin_product_list' %}" class="btn btn-secondary">Hủy</a>
+    <a href="{% url 'shop:admin_product_list' %}" class="btn btn-secondary">Hủy</a>
   </form>
 </div>
 {% endblock %}

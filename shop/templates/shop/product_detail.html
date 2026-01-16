@@ -5,100 +5,234 @@
 <div class="container my-5">
   <div class="card shadow-sm">
     <div class="row g-0">
+
       <!-- Ảnh sản phẩm -->
-      <div class="col-md-6">
+      <div class="col-md-6 text-center">
         {% if product.image %}
-          <img src="{{ product.image.url }}"
-               class="img-fluid rounded-start p-3"
-               alt="{{ product.name }}">
+          <img src="{{ product.image.url }}" class="img-fluid product-img" alt="{{ product.name }}">
         {% else %}
-          <img src="https://via.placeholder.com/600x600?text=No+Image"
-               class="img-fluid rounded-start p-3"
-               alt="No image">
+          <img src="https://via.placeholder.com/600x600?text=No+Image" class="img-fluid product-img" alt="No image">
         {% endif %}
       </div>
 
       <!-- Thông tin sản phẩm -->
       <div class="col-md-6">
         <div class="card-body">
-          <h2 class="card-title fw-bold">{{ product.name }}</h2>
-          <p class="text-muted small mb-2">Danh mục: {{ product.category.name }}</p>
-          <h3 class="text-danger mb-3">{{ product.price_vnd }}</h3>
-          <div class="mb-3 d-flex align-items-center">
-            <span class="text-warning me-2">⭐ {{ product.rating }}</span>
-            <span class="text-muted">Còn lại: {{ product.stock }}</span>
-          </div>
-          <p class="mb-4">{{ product.description }}</p>
 
-          <form method="post" action="{% url 'cart' %}">
+          <h2 class="card-title">{{ product.name }}</h2>
+          <p class="text-muted small">Danh mục: {{ product.category.name }}</p>
+
+          <!-- GIÁ TIỀN -->
+          <div class="price">
+            {{ product.price_vnd }}
+          </div>
+
+          <!-- Rating & tồn kho -->
+          <div class="mb-3">
+            {% if product.stock > 0 %}
+              <span class="text-warning fw-semibold">⭐ {{ product.rating }}</span>
+              <span class="text-muted ms-2">Còn lại: {{ product.stock }}</span>
+            {% else %}
+              <span class="text-danger fw-bold">Hết hàng</span>
+            {% endif %}
+          </div>
+
+          <p class="description">{{ product.description }}</p>
+
+          {% if product.stock > 0 %}
+          <form method="post" action="{% url 'shop:cart' %}">
             {% csrf_token %}
             <input type="hidden" name="product_id" value="{{ product.id }}">
+
+            <!-- SỐ LƯỢNG -->
             <div class="d-flex align-items-center mb-4">
-              <label class="me-3 mb-0">Số lượng:</label>
-              <div class="input-group">
+              <label class="me-3 fw-semibold">Số lượng:</label>
+              <div class="input-group qty-group">
                 <button type="button" class="btn btn-outline-secondary" id="decBtn">−</button>
+                <input type="number"
+                       id="qtyInput"
+                       name="quantity"
+                       value="1"
+                       min="1"
+                       max="{{ product.stock }}"
+                       class="form-control text-center">
+                <button type="button" class="btn btn-outline-secondary" id="incBtn">+</button>
+              </div>
+            </div>
+
+            <!-- NÚT -->
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-success flex-fill">
+                🛒 Thêm vào giỏ
+              </button>
+              <button type="button" id="buyNowBtn" class="btn btn-primary flex-fill">
+                ⚡ Mua ngay
+              </button>
+            </div>
+          </form>
+          {% else %}
+            <div class="alert alert-danger fw-bold mt-3">
+              Sản phẩm hiện đã hết hàng.
+            </div>
+          {% endif %}
+
+          <!-- THANH TOÁN -->
+          <div id="paymentForm" class="payment-box mt-4" style="display:none;">
+            <h4>Thanh toán</h4>
+            <form method="post" action="{% url 'shop:cart' %}">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ product.id }}">
+              <div class="mb-3">
+                <label class="form-label">Số lượng</label>
                 <input type="number"
                        name="quantity"
                        value="1"
                        min="1"
                        max="{{ product.stock }}"
-                       class="form-control text-center"
-                       id="qtyInput"
-                       style="max-width: 60px;">
-                <button type="button" class="btn btn-outline-secondary" id="incBtn">+</button>
+                       class="form-control"
+                       required>
               </div>
-            </div>
+              <button type="submit" class="btn btn-success">Xác nhận</button>
+              <button type="button" id="cancelPaymentBtn" class="btn btn-secondary ms-2">Hủy</button>
+            </form>
+          </div>
 
-            <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-success flex-fill">
-                <i class="bi bi-cart-plus"></i> Thêm vào giỏ
-              </button>
-              <a href="{% url 'checkout' %}" class="btn btn-primary flex-fill">
-                Mua ngay
-              </a>
-            </div>
-          </form>
-
-          <a href="{% url 'home' %}" class="btn btn-link mt-3">
+          <a href="{% url 'shop:home' %}" class="btn btn-link mt-4">
             ← Quay lại danh sách
           </a>
+
         </div>
       </div>
     </div>
   </div>
+
+  <!-- MESSAGES -->
+  <div class="mt-4">
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- COMMENTS -->
+  <div class="mt-5">
+    <h3>Comment sản phẩm</h3>
+
+    {% if comments %}
+      <ul class="list-group mb-4">
+        {% for comment in comments %}
+          <li class="list-group-item">
+            <strong>{{ comment.user.username }}</strong>
+            <span class="text-warning">⭐ {{ comment.rating }}</span>
+            <p>{{ comment.comment|linebreaks }}</p>
+            <small class="text-muted">{{ comment.created_at|date:"d/m/Y H:i" }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>Chưa có comment nào.</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+      <h4>Viết comment</h4>
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          {{ form.rating.label_tag }}
+          {{ form.rating }}
+        </div>
+        <div class="mb-3">
+          {{ form.comment.label_tag }}
+          {{ form.comment }}
+        </div>
+        <button class="btn btn-primary">Gửi</button>
+      </form>
+    {% else %}
+      <p><a href="{% url 'login' %}?next={{ request.path }}">Đăng nhập</a> để comment.</p>
+    {% endif %}
+  </div>
 </div>
 
+<!-- JS -->
 <script>
-  // JS tăng/giảm số lượng
   const decBtn = document.getElementById('decBtn');
   const incBtn = document.getElementById('incBtn');
   const qtyInput = document.getElementById('qtyInput');
+  const maxStock = {{ product.stock|default:0 }};
 
-  decBtn.addEventListener('click', () => {
+  decBtn.onclick = () => {
     let v = parseInt(qtyInput.value) || 1;
     if (v > 1) qtyInput.value = v - 1;
-  });
+  };
 
-  incBtn.addEventListener('click', () => {
+  incBtn.onclick = () => {
     let v = parseInt(qtyInput.value) || 1;
-    if (v < {{ product.stock }}) qtyInput.value = v + 1;
-  });
+    if (v < maxStock) qtyInput.value = v + 1;
+  };
+
+  document.getElementById('buyNowBtn').onclick = () => {
+    document.getElementById('paymentForm').style.display = 'block';
+  };
+
+  document.getElementById('cancelPaymentBtn').onclick = () => {
+    document.getElementById('paymentForm').style.display = 'none';
+  };
 </script>
 
+<!-- CSS -->
 <style>
-  .card {
-    border-radius: 0.75rem;
-    overflow: hidden;
+.card {
+  border-radius: 14px;
+  border: none;
+}
+
+.product-img {
+  max-height: 520px;
+  object-fit: contain;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.card-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.price {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #d70018;
+  margin: 10px 0 15px;
+}
+
+.description {
+  line-height: 1.6;
+  color: #444;
+}
+
+.qty-group {
+  max-width: 160px;
+}
+
+.payment-box {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.list-group-item {
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .price {
+    font-size: 1.7rem;
   }
-  .card-body {
-    padding: 2rem;
-  }
-  .shadow-sm {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
-  }
-  .input-group .btn {
-    border-radius: 0;
-  }
+}
 </style>
 {% endblock %}
-  

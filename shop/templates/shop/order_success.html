@@ -1,8 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container my-5 text-center">
+
+<style>
+  .order-success {
+    background-color: #f8f9fa;
+    padding: 50px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .order-success:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .order-success h1 {
+    color: #28a745;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .order-success p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+
+  .order-success .btn-primary {
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 25px;
+  }
+</style>
+
+<div class="container my-5 text-center order-success">
   <h1>Đặt hàng thành công!</h1>
   <p>Mã đơn hàng: {{ order.id }}</p>
-  <a href="{% url 'home' %}" class="btn btn-primary">Tiếp tục mua hàng</a>
+  <a href="{% url 'shop:order_tracking' order.id %}" class="btn btn-info mb-3">Xem trạng thái đơn hàng</a>
+  <br>
+  <a href="{% url 'shop:home' %}" class="btn btn-primary">Tiếp tục mua hàng</a>
 </div>
+
 {% endblock %}

@@ -4,6 +4,305 @@
 
 {% block content %}
 <div class="container my-5">
+  <style>
+    /* Root variables for consistent theming */
+    :root {
+      --primary-color: #2ecc71; /* Vibrant green for primary actions */
+      --primary-hover: #27ae60; /* Darker green for hover */
+      --text-dark: #1a202c; /* Darker text for better contrast */
+      --text-muted: #718096; /* Softer muted text */
+      --border-light: #e2e8f0; /* Light border for inputs */
+      --bg-light: #f7fafc; /* Subtle background */
+      --bg-white: #ffffff; /* Pure white for main container */
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Softer shadow */
+      --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08); /* Lighter shadow for cards */
+      --transition: all 0.3s ease-in-out; /* Smooth transitions */
+      --border-radius: 10px; /* Consistent border radius */
+    }
+
+    /* Container styling */
+    .container.my-5 {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: var(--bg-white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 2.5rem;
+      color: var(--text-dark);
+      margin-bottom: 2.5rem;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+    }
+
+    h3 {
+      font-size: 1.875rem;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    h4 {
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+    }
+
+    /* Form styling */
+    form {
+      margin-bottom: 2.5rem;
+    }
+
+    /* Address form inputs */
+    .col-md-6 p {
+      margin-bottom: 1.5rem;
+    }
+
+    .col-md-6 label {
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      display: block;
+      font-size: 1rem;
+    }
+
+    .col-md-6 input,
+    .col-md-6 textarea,
+    .col-md-6 select {
+      width: 100%;
+      padding: 0.875rem;
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: var(--bg-light);
+      transition: var(--transition);
+    }
+
+    .col-md-6 input:focus,
+    .col-md-6 textarea:focus,
+    .col-md-6 select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+      background-color: var(--bg-white);
+    }
+
+    /* Table styling */
+    .table {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      background-color: var(--bg-light);
+      box-shadow: var(--shadow-light);
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .table th,
+    .table td {
+      padding: 1rem;
+      vertical-align: middle;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      border: none;
+    }
+
+    .table th {
+      font-weight: 600;
+      background: linear-gradient(180deg, #edf2f7, #e2e8f0);
+      color: var(--text-dark);
+    }
+
+    .table tbody tr {
+      transition: background-color 0.2s ease;
+    }
+
+    .table tbody tr:hover {
+      background-color: rgba(46, 204, 113, 0.05);
+    }
+
+    .text-end {
+      text-align: right !important;
+    }
+
+    .text-center {
+      text-align: center !important;
+    }
+
+    .table-light {
+      background: linear-gradient(180deg, #edf2f7, #e2e8f0) !important;
+    }
+
+    .table-light th {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    /* Payment method styling */
+    .form-check {
+      margin-bottom: 1.25rem;
+      padding-left: 2rem;
+      position: relative;
+    }
+
+    .form-check-input {
+      width: 1.25rem;
+      height: 1.25rem;
+      margin-top: 0.25rem;
+      cursor: pointer;
+      accent-color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .form-check-label {
+      font-size: 1rem;
+      color: var(--text-dark);
+      cursor: pointer;
+      margin-left: 0.75rem;
+      transition: var(--transition);
+    }
+
+    .form-check-input:checked + .form-check-label {
+      color: var(--primary-color);
+      font-weight: 500;
+    }
+
+    /* QR code styling (if used) */
+    #bank_qr {
+      padding: 1.25rem;
+      margin-top: 1rem;
+      display: none;
+      background-color: var(--bg-light);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+    }
+
+    #bank_qr p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    #bank_qr img {
+      max-width: 180px;
+      border-radius: 6px;
+      border: 1px solid var(--border-light);
+      transition: var(--transition);
+    }
+
+    #bank_qr img:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow);
+    }
+
+    /* Submit button */
+    .btn-success {
+      background: linear-gradient(135deg, var(--primary-color), #27ae60);
+      border: none;
+      padding: 0.875rem 2.5rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      border-radius: 6px;
+      transition: var(--transition);
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(135deg, var(--primary-hover), #219653);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(46, 204, 113, 0.3);
+    }
+
+    .btn-success:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .container.my-5 {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      h3 {
+        font-size: 1.75rem;
+      }
+
+      h4 {
+        font-size: 1.375rem;
+      }
+
+      .col-md-6 {
+        margin-bottom: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .table th,
+      .table td {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+      }
+
+      .btn-success {
+        width: 100%;
+        padding: 0.75rem;
+      }
+
+      #bank_qr img {
+        max-width: 150px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container.my-5 {
+        padding: 1rem;
+        margin: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .table th,
+      .table td {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+      }
+
+      #bank_qr img {
+        max-width: 120px;
+      }
+
+      .form-check {
+        padding-left: 1.5rem;
+      }
+    }
+  </style>
+
   <h1 class="mb-4">Thanh toán</h1>
   <form method="post">
     {% csrf_token %}
@@ -19,7 +318,7 @@
         <table class="table rounded shadow-sm">
           <thead class="table-light">
             <tr>
-              <th>Sản phẩm</th>
+              <th>Thanh Toán</th>
               <th class="text-end">Đơn giá</th>
               <th class="text-center">Số lượng</th>
               <th class="text-end">Thành tiền</th>
@@ -48,27 +347,18 @@
     <!-- Phương thức thanh toán -->
     <div class="mb-4">
       <h4>Phương thức thanh toán</h4>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="payment_method" id="pm_bank" value="BANK_TRANSFER" checked>
-        <label class="form-check-label" for="pm_bank">
-          Chuyển khoản ngân hàng
-        </label>
-      </div>
-      <!-- QR code cho chuyển khoản -->
-      <div id="bank_qr" class="ps-4 mt-2">
-        <p>Quét mã QR để thanh toán:</p>
-        <img src="{% static 'img/bank_qr.png' %}" alt="Mã QR chuyển khoản" class="img-thumbnail" style="max-width:150px;">
-      </div>
+      
       <div class="form-check">
         <input class="form-check-input" type="radio" name="payment_method" id="pm_cod" value="COD">
         <label class="form-check-label" for="pm_cod">
           Thanh toán khi nhận hàng (COD)
         </label>
       </div>
+      
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="payment_method" id="pm_card" value="BANK_CARD">
-        <label class="form-check-label" for="pm_card">
-          Thanh toán bằng thẻ ngân hàng
+        <input class="form-check-input" type="radio" name="payment_method" id="pm_payos" value="PAYOS">
+        <label class="form-check-label" for="pm_payos">
+          Thanh toán qua PayOS
         </label>
       </div>
     </div>
@@ -78,13 +368,17 @@
 </div>
 
 <script>
-  // Hiển thị/ẩn QR code tùy chọn phương thức
+  // Since pm_bank and pm_card are not present, remove related logic
+  // If you plan to add a QR code for PayOS or another method, you can modify this
   function toggleQR() {
-    document.getElementById('bank_qr').style.display = document.getElementById('pm_bank').checked ? 'block' : 'none';
+    const bankQR = document.getElementById('bank_qr');
+    if (bankQR) {
+      // Example: Show QR only for PayOS if needed
+      bankQR.style.display = document.getElementById('pm_payos').checked ? 'block' : 'none';
+    }
   }
-  document.getElementById('pm_bank').addEventListener('change', toggleQR);
   document.getElementById('pm_cod').addEventListener('change', toggleQR);
-  document.getElementById('pm_card').addEventListener('change', toggleQR);
+  document.getElementById('pm_payos').addEventListener('change', toggleQR);
   window.addEventListener('load', toggleQR);
 </script>
 {% endblock %}

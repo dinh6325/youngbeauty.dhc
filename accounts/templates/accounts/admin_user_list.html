@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+/* General Reset and Typography */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    line-height: 1.6;
+}
+
+h2 {
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* Container Styling */
+.container.my-5 {
+    max-width: 1200px;
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container.my-5:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Table Styling */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: #3182ce;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 2px solid #2b6cb0;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    color: #2d3748;
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    accent-color: #3182ce;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+}
+
+.btn-primary {
+    background-color: #3182ce;
+    border-color: #3182ce;
+}
+
+.btn-primary:hover {
+    background-color: #2b6cb0;
+    border-color: #2b6cb0;
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background-color: #e53e3e;
+    border-color: #e53e3e;
+}
+
+.btn-danger:hover {
+    background-color: #c53030;
+    border-color: #c53030;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: #718096;
+    border-color: #718096;
+}
+
+.btn-secondary:hover {
+    background-color: #5a677a;
+    border-color: #5a677a;
+    transform: translateY(-2px);
+}
+
+.btn.ms-1 {
+    margin-left: 0.5rem;
+}
+
+.btn.mt-3 {
+    margin-top: 1rem;
+}
+
+/* Empty Table Message */
+.table tbody tr td[colspan] {
+    text-align: center;
+    color: #718096;
+    font-style: italic;
+    padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container.my-5 {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    .table thead th,
+    .table tbody td {
+        font-size: 0.9rem;
+        padding: 0.75rem;
+    }
+
+    .btn-sm {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+    }
+
+    .btn.mt-3 {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .table thead th,
+    .table tbody td {
+        min-width: 120px;
+    }
+}
+</style>
+
+<div class="container my-5">
+  <h2>Danh sách người dùng</h2>
+  <form method="post" action="{% url 'delete_users' %}">
+    {% csrf_token %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="select_all" /></th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Họ tên</th>
+          <th>Quyền</th>
+          <th>Ngày tạo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>
+            {% if not user.is_superuser and user != request.user %}
+            <input type="checkbox" name="user_ids" value="{{ user.id }}" />
+            {% endif %}
+          </td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.get_full_name }}</td>
+          <td>
+            {% if user.is_superuser %}
+              Admin
+            {% elif user.is_staff %}
+              Staff
+            {% else %}
+              User
+            {% endif %}
+          </td>
+          <td>{{ user.date_joined|date:"d/m/Y H:i" }}</td>
+          <td>
+            <a href="{% url 'admin_user_edit' user.id %}" class="btn btn-sm btn-primary">Chỉnh sửa</a>
+            {% if user.is_superuser and user != request.user %}
+            <a href="{% url 'delete_superuser' user.id %}" class="btn btn-sm btn-danger ms-1">Xóa Admin</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6">Không có người dùng nào.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit" class="btn btn-danger mt-3" onclick="return confirm('Bạn có chắc muốn xóa các người dùng đã chọn?');">Xóa người dùng đã chọn</button>
+  </form>
+  <a href="{% url 'shop:home' %}" class="btn btn-secondary mt-3">Quay lại Dashboard</a>
+</div>
+
+<script>
+  document.getElementById('select_all').addEventListener('change', function(e) {
+    const checkboxes = document.querySelectorAll('input[name="user_ids"]');
+    checkboxes.forEach(cb => cb.checked = e.target.checked);
+  });
+</script>
+{% endblock %}

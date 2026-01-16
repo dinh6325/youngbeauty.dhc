@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  .payment-cancel {
+    background-color: #f8f9fa;
+    padding: 50px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .payment-cancel:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .payment-cancel h1 {
+    color: #dc3545;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .payment-cancel p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+
+  .payment-cancel .btn-primary {
+    padding: 10px 25px;
+    font-size: 1rem;
+    border-radius: 25px;
+  }
+</style>
+
+<div class="container my-5 text-center payment-cancel">
+  <h1>Bạn đã hủy giao dịch!</h1>
+  <p>Giao dịch thanh toán đã bị hủy.</p>
+  <a href="{% url 'shop:home' %}" class="btn btn-primary">Quay lại trang chủ</a>
+</div>
+
+{% endblock %}

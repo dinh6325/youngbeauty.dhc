@@ -1,26 +1,177 @@
-{% extends 'base.html' %}
+{% extends 'base_no_header_footer.html' %}
+{% load static %}
 {% block title %}Đăng nhập{% endblock %}
 
 {% block content %}
-<div class="row justify-content-center mt-5">
-  <div class="col-md-4">
-    <h2 class="mb-4 text-center">Đăng nhập</h2>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
-      <div class="mb-3">
-        <label for="id_username" class="form-label">Username</label>
-        {{ form.username }}
+<style>
+  .container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+
+  .row {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .image-side {
+    flex: 1;
+    padding: 2rem;
+  }
+
+  .image-side img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+
+  .form-side {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .login-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    text-align: center;
+    letter-spacing: -0.025em;
+  }
+
+  .form-label {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: #374151;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-control {
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background: #f9fafb;
+    transition: all 0.2s ease;
+  }
+
+  .form-control:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: #fff;
+  }
+
+  .errorlist {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .btn-primary {
+    background: #1f2937;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+
+  .btn-primary:hover {
+    background: #111827;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .register-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #6b7280;
+  }
+
+  .register-link a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .register-link a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .image-side {
+      display: none;
+    }
+
+    .form-side {
+      flex: 1 1 100%;
+      padding: 1rem;
+    }
+
+    .login-card {
+      padding: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <!-- Hình minh họa -->
+    <div class="image-side">
+      <img src="https://img.lovepik.com/png/20231112/cybersecurity-clipart-detailed-illustration-of-various-cartoon-characters-and-computer_564960_wh1200.png" alt="Login illustration">
+    </div>
+    
+
+    <!-- Form đăng nhập -->
+    <div class="form-side">
+      <div class="login-card">
+        <h2>Đăng nhập</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          <div class="mb-3">
+            <label for="id_username" class="form-label">Username</label>
+            {{ form.username }}
+          </div>
+          <div class="mb-3">
+            <label for="id_password" class="form-label">Mật khẩu</label>
+            {{ form.password }}
+          </div>
+          <button type="submit" class="btn btn-primary">Đăng nhập</button>
+        </form>
+        <p class="register-link">
+          Chưa có tài khoản? <a href="{% url 'register' %}">Đăng ký</a>
+        </p>
       </div>
-      <div class="mb-3">
-        <label for="id_password" class="form-label">Mật khẩu</label>
-        {{ form.password }}
-      </div>
-      <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-    </form>
-    <p class="text-center mt-3">
-      Chưa có tài khoản? <a href="{% url 'register' %}">Đăng ký</a>
-    </p>
+    </div>
   </div>
 </div>
 {% endblock %}

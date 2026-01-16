@@ -1,374 +1,133 @@
 [
-    {
-      "model": "shop.category",
-      "pk": 1,
-      "fields": {
-        "name": "Laptop",
-        "slug": "laptop"
-      }
-    },
-    {
-      "model": "shop.category",
-      "pk": 2,
-      "fields": {
-        "name": "Điện thoại",
-        "slug": "dien-thoai"
-      }
-    },
-    {
-      "model": "shop.category",
-      "pk": 3,
-      "fields": {
-        "name": "Máy tính bảng",
-        "slug": "may-tinh-bang"
-      }
-    },
-    {
-      "model": "shop.category",
-      "pk": 4,
-      "fields": {
-        "name": "Phụ kiện",
-        "slug": "phu-kien"
-      }
-    },
-    {
-      "model": "shop.category",
-      "pk": 5,
-      "fields": {
-        "name": "Âm thanh",
-        "slug": "am-thanh"
-      }
-    },
-  
-    {
-      "model": "shop.product",
-      "pk": 1,
-      "fields": {
-        "created_at": "2025-04-18T07:00:00Z",
-        "category": 1,
-        "name": "MacBook Pro 14\" M2 Pro",
-        "slug": "macbook-pro-14-m2-pro",
-        "description": "MacBook Pro 14-inch với chip M2 Pro, 16GB RAM, 512GB SSD.",
-        "price": "49990000.00",
-        "stock": 20,
-        "rating": 4.8,
-        "image": "products/macbook_pro_14_m2_pro.jpg"
-      }
-    },
-    {
-      "model": "shop.product",
-      "pk": 2,
-      "fields": {
-        "created_at": "2025-04-18T07:00:00Z",
-        "category": 1,
-        "name": "Dell XPS 13",
-        "slug": "dell-xps-13",
-        "description": "Dell XPS 13, Intel i7, 16GB RAM, 512GB SSD.",
-        "price": "31990000.00",
-        "stock": 15,
-        "rating": 4.5,
-        "image": "products/dell_xps_13.jpg"
-      }
-    },
-    {
-      "model": "shop.product",
-      "pk": 3,
-      "fields": {
-        "created_at": "2025-04-18T07:00:00Z",
-        "category": 2,
-        "name": "iPhone 14 Pro",
-        "slug": "iphone-14-pro",
-        "description": "iPhone 14 Pro, 128GB, màu Midnight.",
-        "price": "28990000.00",
-        "stock": 30,
-        "rating": 4.7,
-        "image": "products/iphone_14_pro.jpg"
-      }
-    },
-    {
-      "model": "shop.product",
-      "pk": 4,
-      "fields": {
-        "created_at": "2025-04-18T07:00:00Z",
-        "category": 2,
-        "name": "Samsung Galaxy S23",
-        "slug": "samsung-galaxy-s23",
-        "description": "Samsung Galaxy S23, 128GB, màu Phantom Black.",
-        "price": "20990000.00",
-        "stock": 25,
-        "rating": 4.6,
-        "image": "products/samsung_galaxy_s23.jpg"
-      }
-    },
-    {
-      "model": "shop.product",
-      "pk": 5,
-      "fields": {
-        "created_at": "2025-04-18T07:00:00Z",
-        "category": 3,
-        "name": "iPad Air 5",
-        "slug": "ipad-air-5",
-        "description": "iPad Air 5 (2022), chip M1, 64GB.",
-        "price": "14990000.00",
-        "stock": 18,
-        "rating": 4.4,
-        "image": "products/ipad_air_5.jpg"
-      }
-    },
-    {
-      "model": "shop.product",
-      "pk": 6,
-      "fields": {
-        "created_at": "2025-04-18T07:00:00Z",
-        "category": 4,
-        "name": "AirPods Pro (Gen 2)",
-        "slug": "airpods-pro-gen-2",
-        "description": "Tai nghe không dây AirPods Pro thế hệ 2.",
-        "price": "5990000.00",
-        "stock": 50,
-        "rating": 4.9,
-        "image": "products/airpods_pro_gen2.jpg"
-      }
-    },
-    {
-      "model": "shop.product",
-      "pk": 7,
-      "fields": {
-        "created_at": "2025-04-18T07:00:00Z",
-        "category": 5,
-        "name": "Loa JBL Charge 5",
-        "slug": "loa-jbl-charge-5",
-        "description": "Loa bluetooth JBL Charge 5, chống nước IP67.",
-        "price": "3799000.00",
-        "stock": 22,
-        "rating": 4.3,
-        "image": "products/loa_jbl_charge_5.jpg"
-      }
-    },
-      {
-        "model": "shop.product",
-        "pk": 8,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 1,
-          "name": "HP Spectre x360 14",
-          "slug": "hp-spectre-x360-14",
-          "description": "HP Spectre x360 14-inch, Intel i7, 16GB RAM, 512GB SSD.",
-          "price": "35000000.00",
-          "stock": 10,
-          "rating": 4.6,
-          "image": "products/hp_spectre_x360_14.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 9,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 1,
-          "name": "Lenovo ThinkPad X1 Carbon",
-          "slug": "lenovo-thinkpad-x1-carbon",
-          "description": "Lenovo ThinkPad X1 Carbon, 14-inch, Intel i7, 16GB RAM, 512GB SSD.",
-          "price": "38000000.00",
-          "stock": 12,
-          "rating": 4.7,
-          "image": "products/lenovo_thinkpad_x1_carbon.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 10,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 1,
-          "name": "Asus ROG Zephyrus G14",
-          "slug": "asus-rog-zephyrus-g14",
-          "description": "Asus ROG Zephyrus G14, 14-inch, AMD Ryzen 9, 16GB RAM, 1TB SSD, RTX 3060.",
-          "price": "45000000.00",
-          "stock": 8,
-          "rating": 4.8,
-          "image": "products/asus_rog_zephyrus_g14.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 11,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 2,
-          "name": "Google Pixel 7",
-          "slug": "google-pixel-7",
-          "description": "Google Pixel 7, 128GB, màu Sorta Seafoam.",
-          "price": "15000000.00",
-          "stock": 20,
-          "rating": 4.5,
-          "image": "products/google_pixel_7.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 12,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 2,
-          "name": "OnePlus 10 Pro",
-          "slug": "oneplus-10-pro",
-          "description": "OnePlus 10 Pro, 256GB, màu Volcanic Black.",
-          "price": "22000000.00",
-          "stock": 15,
-          "rating": 4.6,
-          "image": "products/oneplus_10_pro.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 13,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 2,
-          "name": "Xiaomi Mi 12",
-          "slug": "xiaomi-mi-12",
-          "description": "Xiaomi Mi 12, 256GB, màu Blue.",
-          "price": "18000000.00",
-          "stock": 18,
-          "rating": 4.4,
-          "image": "products/xiaomi_mi_12.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 14,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 3,
-          "name": "Samsung Galaxy Tab S8",
-          "slug": "samsung-galaxy-tab-s8",
-          "description": "Samsung Galaxy Tab S8, 128GB, kèm S Pen.",
-          "price": "20000000.00",
-          "stock": 10,
-          "rating": 4.7,
-          "image": "products/samsung_galaxy_tab_s8.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 15,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 3,
-          "name": "Lenovo Tab P11 Pro",
-          "slug": "lenovo-tab-p11-pro",
-          "description": "Lenovo Tab P11 Pro, 128GB, màn hình OLED.",
-          "price": "12000000.00",
-          "stock": 15,
-          "rating": 4.3,
-          "image": "products/lenovo_tab_p11_pro.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 16,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 4,
-          "name": "Spigen Clear Case cho iPhone 14 Pro",
-          "slug": "spigen-clear-case-iphone-14-pro",
-          "description": "Ốp lưng trong suốt cho iPhone 14 Pro bởi Spigen.",
-          "price": "500000.00",
-          "stock": 50,
-          "rating": 4.2,
-          "image": "products/spigen_clear_case_iphone_14_pro.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 17,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 4,
-          "name": "Sạc nhanh Samsung 25W",
-          "slug": "samsung-25w-fast-charger",
-          "description": "Sạc nhanh 25W cho các thiết bị Samsung.",
-          "price": "300000.00",
-          "stock": 100,
-          "rating": 4.0,
-          "image": "products/samsung_25w_fast_charger.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 18,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 4,
-          "name": "Cáp USB-C to Lightning 1m",
-          "slug": "usb-c-to-lightning-cable-1m",
-          "description": "Cáp USB-C sang Lightning dài 1m cho thiết bị Apple.",
-          "price": "200000.00",
-          "stock": 200,
-          "rating": 4.1,
-          "image": "products/usb_c_to_lightning_cable_1m.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 19,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 4,
-          "name": "Kính cường lực cho iPad Air 5",
-          "slug": "tempered-glass-screen-protector-ipad-air-5",
-          "description": "Kính cường lực bảo vệ màn hình cho iPad Air 5.",
-          "price": "250000.00",
-          "stock": 50,
-          "rating": 4.3,
-          "image": "products/tempered_glass_screen_protector_ipad_air_5.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 20,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 5,
-          "name": "Bose QuietComfort 45",
-          "slug": "bose-quietcomfort-45",
-          "description": "Tai nghe chống ồn Bose QuietComfort 45.",
-          "price": "8000000.00",
-          "stock": 15,
-          "rating": 4.8,
-          "image": "products/bose_quietcomfort_45.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 21,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 5,
-          "name": "Sony WH-1000XM5",
-          "slug": "sony-wh-1000xm5",
-          "description": "Tai nghe chống ồn Sony WH-1000XM5.",
-          "price": "9000000.00",
-          "stock": 12,
-          "rating": 4.9,
-          "image": "products/sony_wh_1000xm5.jpg"
-        }
-      },
-      {
-        "model": "shop.product",
-        "pk": 22,
-        "fields": {
-          "created_at": "2025-04-18T07:00:00Z",
-          "category": 5,
-          "name": "Sonos Beam",
-          "slug": "sonos-beam",
-          "description": "Loa soundbar Sonos Beam tích hợp Alexa.",
-          "price": "10000000.00",
-          "stock": 10,
-          "rating": 4.7,
-          "image": "products/sonos_beam.jpg"
-        }
-      }
-  ]
-  
+  {
+    "model": "shop.product",
+    "pk": 1,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 1,
+      "name": "Son Dior Addict Lip Glow",
+      "slug": "son-dior-addict-lip-glow",
+      "description": "Son dưỡng có màu cao cấp từ Dior, giúp môi căng mọng, mềm mịn và lên màu tự nhiên theo độ pH của môi. Công thức giàu dưỡng chất giúp nuôi dưỡng môi suốt cả ngày, hạn chế khô nứt và mang lại vẻ tươi tắn, rạng rỡ.",
+      "price": "850000.00",
+      "stock": 20,
+      "rating": 4.8,
+      "image": "products/Anh1.jpg"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 2,
+    "fields": {
+    "created_at": "2025-04-25T07:00:00Z",
+    "category": 4,
+    "name": "Cọ Trang Điểm DHC",
+    "slug": "co-trang-diem-dhc",
+    "description": "Cọ trang điểm DHC được làm từ sợi lông mềm mịn cao cấp, giúp tán đều phấn nền, phấn phủ hoặc phấn má một cách tự nhiên. Thiết kế vừa tay, dễ sử dụng, không gây kích ứng da và phù hợp cho cả người mới bắt đầu lẫn trang điểm chuyên nghiệp.",
+    "price": "280000.00",
+    "stock": 35,
+    "rating": 4.6,
+    "image": "products/Anh2.jpg"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 3,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 2,
+      "name": "Kem nền L'Oréal Infallible",
+      "slug": "kem-nen-loreal-infallible",
+      "description": "Kem nền L'Oréal Infallible với khả năng che phủ cao, giúp làm đều màu da và che khuyết điểm hiệu quả. Kết cấu mỏng nhẹ, bền màu suốt nhiều giờ, phù hợp cho cả trang điểm hằng ngày và những dịp cần lớp nền lâu trôi.",
+      "price": "380000.00",
+      "stock": 25,
+      "rating": 4.5,
+      "image": "products/kem-nen-loreal-infallible.jpeg"
+    }
+  },
+  {
+    "model": "shop.product", 
+    "pk": 4,
+     "fields": { "created_at": "2025-04-25T07:00:00Z", 
+     "category": 1, "name": "Son Black Rouge Air Fit Velvet Tint", 
+     "slug": "son-black-rouge-air-fit-velvet", 
+     "description": "Son kem lì Black Rouge với chất son mịn như nhung, dễ tán và bám màu tốt. Màu sắc trẻ trung, thời thượng, phù hợp sử dụng hằng ngày. Khi lên môi tạo hiệu ứng nhẹ nhàng, không gây khô hay nặng môi.", 
+     "price": "280000.00", 
+     "stock": 35, "rating": 4.6,
+      "image": "products/Son Black Rouge.jpg" }
+  },
+  {
+    "model": "shop.product",
+    "pk": 5,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 3,
+      "name": "Phấn phủ Laura Mercier",
+      "slug": "phan-phu-laura-mercier",
+      "description": "Phấn phủ không màu Laura Mercier nổi tiếng với khả năng kiềm dầu và giữ lớp nền lâu trôi. Kết cấu mịn nhẹ, không gây nặng mặt, giúp lớp trang điểm trông tự nhiên và bền đẹp suốt cả ngày.",
+      "price": "950000.00",
+      "stock": 15,
+      "rating": 4.9,
+      "image": "products/phan-phu-laura-mercier.jpg"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 6,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 3,
+      "name": "Cushion April Skin Magic Snow",
+      "slug": "cushion-april-skin-magic-snow",
+      "description": "Phấn nước April Skin Magic Snow với độ che phủ tốt, giúp nâng tông da tự nhiên và mang lại làn da mịn màng. Dễ dàng dặm lại trong ngày, phù hợp cho phong cách trang điểm trong trẻo, nhẹ nhàng.",
+      "price": "590000.00",
+      "stock": 20,
+      "rating": 4.5,
+      "image": "products/cushion-april-skin-magic-snow.jpg"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 7,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 4,
+      "name": "Mascara Kiss Me Heroine Make",
+      "slug": "mascara-kiss-me-heroine-make",
+      "description": "Mascara Kiss Me Heroine Make nổi bật với khả năng chống nước vượt trội, giúp mi cong và dài rõ rệt. Giữ nếp mi suốt nhiều giờ liền, phù hợp cho cả ngày dài hoạt động mà không lo lem trôi.",
+      "price": "320000.00",
+      "stock": 28,
+      "rating": 4.8,
+      "image": "products/mascara-kiss-me-heroine-make.jpeg"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 8,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 4,
+      "name": "Bút kẻ mày Innisfree Auto Eyebrow",
+      "slug": "but-ke-may-innisfree-auto",
+      "description": "Chì kẻ mày Innisfree Auto Eyebrow có thiết kế tiện lợi, dễ sử dụng ngay cả với người mới bắt đầu. Màu sắc tự nhiên, giúp định hình chân mày hài hòa với khuôn mặt mà không bị quá đậm.",
+      "price": "150000.00",
+      "stock": 40,
+      "rating": 4.4,
+      "image": "products/but-ke-may-innisfree-auto.jpg"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 9,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 5,
+      "name": "Phấn tạo khối Too Cool For School",
+      "slug": "phan-tao-khoi-too-cool-for-school",
+      "description": "Phấn tạo khối Too Cool For School giúp gương mặt trông thon gọn và sắc nét hơn. Chất phấn mịn, dễ tán, tạo hiệu ứng tự nhiên, phù hợp cho cả trang điểm hằng ngày lẫn các dịp đặc biệt.",
+      "price": "380000.00",
+      "stock": 22,
+      "rating": 4.6,
+      "image": "products/phan-tao-khoi-too-cool-for-school.webp"
+    }
+  }
+]

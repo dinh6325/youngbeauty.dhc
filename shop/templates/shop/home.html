@@ -1,16 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
-  <h2 class="mb-4">Sản phẩm</h2>
+
+{% if not user.is_superuser %}
+<form class="row g-3 mb-3" method="get" action="{% url 'shop:home' %}">
+  <div class="col-md-4">
+    <input type="text" class="form-control" name="q" placeholder="Tìm kiếm sản phẩm..." value="{{ q }}">
+  </div>
+  <div class="col-md-3">
+    <select class="form-select" name="category">
+      <option value="">Danh mục</option>
+      {% for c in categories %}
+        <option value="{{ c.id }}" {% if c.id|stringformat:"s" == category %}selected{% endif %}>{{ c.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-2">
+    <input type="number" class="form-control" name="price_min" placeholder="Giá từ" value="{{ price_min }}">
+  </div>
+  <div class="col-md-2">
+    <input type="number" class="form-control" name="price_max" placeholder="Giá đến" value="{{ price_max }}">
+  </div>
+  <div class="col-md-1">
+    <button type="submit" class="btn btn-danger">Lọc</button>
+  </div>
+</form>
+{% endif %}
+
+<h2 class="mb-4">Sản phẩm</h2>
   {% if products %}
     <div class="row gy-4">
       {% for p in products %}
         <div class="col-md-4">
           <div class="card h-100 shadow-sm">
-            {% if p.image %}<img src="{{ p.image.url }}" class="card-img-top">{% endif %}
+            {% if p.image %}
+              <img src="{{ p.image.url }}" class="card-img-top">
+            {% endif %}
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ p.name }}</h5>
               <p class="card-text text-danger fw-bold">{{ p.price_vnd }}</p>
-              <a href="{% url 'product_detail' p.id %}" class="mt-auto btn btn-primary">Xem</a>
+              <a href="{% url 'shop:product_detail' p.id %}" class="mt-auto btn btn-primary">Xem</a>
             </div>
           </div>
         </div>
@@ -19,4 +47,6 @@
   {% else %}
     <p>Không có sản phẩm nào.</p>
   {% endif %}
+{% endif %}
+
 {% endblock %}

@@ -2,11 +2,90 @@
 
 {% block content %}
 <div class="container my-5 text-center">
+  <style>
+    /* Container styling */
+    .container.my-5 {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Heading styling */
+    h1 {
+      font-size: 1.8rem;
+      color: #343a40;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    /* Form styling */
+    .d-inline-block.mt-4 {
+      margin-top: 1.5rem;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      min-width: 100px;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+      background-color: #5a6268;
+      transform: translateY(-2px);
+    }
+
+    /* Margin between buttons */
+    .me-2 {
+      margin-right: 0.5rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+      .container.my-5 {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+      }
+
+      .me-2 {
+        margin-right: 0;
+      }
+    }
+  </style>
+
   <h1>Bạn có chắc muốn xóa sản phẩm “{{ product.name }}” không?</h1>
   <form method="post" class="d-inline-block mt-4">
     {% csrf_token %}
     <button type="submit" class="btn btn-danger me-2">Xóa</button>
-    <a href="{% url 'admin_product_list' %}" class="btn btn-secondary">Hủy</a>
+    <a href="{% url 'shop:admin_product_list' %}" class="btn btn-secondary">Hủy</a>
   </form>
 </div>
 {% endblock %}

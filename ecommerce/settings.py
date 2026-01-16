@@ -1,5 +1,6 @@
 from pathlib import Path
-
+import os
+from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'shop',
     'accounts',
+    'payments',
 ]
 
 
@@ -47,7 +49,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'shop.context_processors.categories',
+                'shop.context_processors.latest_order_status',
             ],
         },
     },
@@ -111,3 +113,12 @@ LOGIN_REDIRECT_URL = '/products/'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'         
 LOGIN_REDIRECT_URL = '/admin/products/'
+
+
+PAYMENT_CONFIG = {
+    "CLIENT_ID": "7eefa141-d3e4-4f92-a1bf-eaa6e7081a75",
+    "API_KEY": "b1841452-8e97-4ccd-9897-0004a5c47f3a",
+    "CHECKSUM_KEY": "f9a45bbd9e5143e09304f066741ccdc9c17b47bd618",
+    "BASE_URL": "https://sandbox.example.com/api/payment",  # đổi sang URL thật theo docs của cổng
+    "WEBHOOK_URL": "http://127.0.0.1:8000/payments/webhook/",  # local callback
+}

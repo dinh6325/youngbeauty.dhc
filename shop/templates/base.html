@@ -3,7 +3,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Bao Long{% endblock %}</title>
+    <title>{% block title %}youngbeauty{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap 5 CSS -->
@@ -12,38 +12,228 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+      body {
+        /* =========================
+   RESET & GLOBAL
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f7efe8, #fffaf6);
+  color: #3b2a20;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+header {
+  background-color: #fffaf6;
+  border-bottom: 1px solid #e6d5c3;
+  box-shadow: 0 3px 8px rgba(90,62,43,.15);
+}
+
+.navbar {
+  padding: 1rem 0;
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #5a3e2b;
+}
+
+.navbar-brand:hover {
+  color: #8b5e3c;
+}
+
+.nav-link {
+  color: #5a3e2b;
+  font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #c9a24d;
+}
+
+/* =========================
+   SEARCH
+========================= */
+.search-bar input {
+  border-radius: 30px;
+  background: #f7efe8;
+  border: 1px solid #d6bfa9;
+}
+
+.search-bar input:focus {
+  border-color: #c9a24d;
+  box-shadow: 0 0 0 3px rgba(201,162,77,.25);
+}
+
+.search-bar button {
+  border-radius: 30px;
+  background: linear-gradient(90deg,#8b5e3c,#5a3e2b);
+  color: #fff;
+  border: none;
+}
+
+/* =========================
+   CAROUSEL
+========================= */
+.carousel-inner img {
+  height: 420px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: 0 12px 25px rgba(90,62,43,.3);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #5a3e2b;
+  border-radius: 50%;
+  padding: 12px;
+}
+
+/* =========================
+   CONTENT
+========================= */
+.container {
+  max-width: 1200px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  background: linear-gradient(135deg,#3b2a20,#1f140e);
+  color: #f7efe8;
+  padding-top: 4rem;
+  margin-top: 4rem;
+}
+
+footer h2,
+footer h3 {
+  font-weight: 700;
+  color: #f7efe8;
+}
+
+footer p,
+footer a {
+  color: #e6d5c3;
+  font-size: .95rem;
+}
+
+footer a:hover {
+  color: #c9a24d;
+  transform: translateX(5px);
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: .7rem;
+}
+
+footer iframe {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,.4);
+}
+
+.social-links a {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #e6d5c3;
+}
+
+.social-links a:hover {
+  color: #c9a24d;
+  transform: scale(1.2);
+}
+
+footer .copyright {
+  background: #1f140e;
+  color: #c9a24d;
+  text-align: center;
+  padding: 1.2rem 0;
+  margin-top: 3rem;
+  font-size: .9rem;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media(max-width:768px){
+  .carousel-inner img{height:220px;}
+  .navbar-brand{font-size:1.3rem;}
+}
+    </style>
 </head>
 <body>
-
-  <!-- Navbar chính -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="{% url 'home' %}">
-        <i class="bi bi-cart3"></i> Bao Long
-      </a>
-      <form class="d-flex mx-auto search-bar" method="get" action="{% url 'home' %}">
-        <input class="form-control me-2" type="search" name="q"
-               placeholder="Tìm kiếm sản phẩm..." aria-label="Search"
-               value="{{ q }}">
-        <button class="btn btn-outline-primary" type="submit">
-          <i class="bi bi-search"></i>
-        </button>
-      </form>
+	      <a class="navbar-brand" href="{% url 'shop:home' %}" >
+	        YOUNGBEAUTY
+	      </a>
+      {% if not user.is_superuser %}
+	      <form class="d-flex mx-auto search-bar" method="get" action="{% url 'shop:home' %}">
+	        <input class="form-control me-2" type="search" name="q"
+	               placeholder="Tìm kiếm sản phẩm..." aria-label="Search"
+	               value="{{ q }}">
+	        <button class="btn btn-outline-primary" type="submit">
+	          <i class="bi bi-search"></i>
+	        </button>
+	      </form>
+      {% endif %}
       <ul class="navbar-nav ms-auto">
+        {% if not user.is_superuser %}
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
-             href="{% url 'home' %}">Sản phẩm</a>
+	          <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}"
+	             href="{% url 'shop:cart' %}">
+	            <i class="bi bi-bag"></i> Giỏ hàng
+	          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'cart' %}active{% endif %}"
-             href="{% url 'cart' %}">
-            <i class="bi bi-bag"></i> Giỏ hàng
-          </a>
-        </li>
+        {% endif %}
         {% if user.is_authenticated %}
           <li class="nav-item">
-            <span class="nav-link">Chào, {{ user.username }}</span>
+            <a class="nav-link" href="{% url 'user_profile' %}">Chào, {{ user.username }}</a>
           </li>
+          {% if user.is_superuser %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin_user_list' %}">
+              Người dùng 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'shop:admin_product_list' %}">
+              Quản trị sản phẩm
+            </a>
+          </li>
+          {% endif %}
+          {% if not user.is_superuser and latest_order_status and not request.path|slice:":6" == '/admin' %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'shop:order_tracking' latest_order_id %}">
+              Xem trạng 
+            </a>
+          </li>
+          {% endif %}
+          {% if user.is_superuser and not request.path|slice:":6" == '/admin' %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'shop:admin_order_list' %}">Xem trạng </a>
+          </li>
+          {% endif %}
           <li class="nav-item">
             <form method="post" action="{% url 'logout' %}" class="d-inline">
               {% csrf_token %}
@@ -56,49 +246,99 @@
                href="{% url 'login' %}">Đăng nhập</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link {% if request.resolver_match.url_name == 'register' %}active{% endif %}"
-               href="{% url 'register' %}">Đăng ký</a>
+            <!-- Removed Đăng ký button as per user request -->
           </li>
         {% endif %}
       </ul>
     </div>
   </nav>
+</header>
 
-  {# Thanh phân loại ngang ngay dưới navbar #}
-  <nav class="bg-light py-2 border-bottom">
-    <div class="container">
-      <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <a href="{% url 'home' %}"
-             class="nav-link px-3 {% if not current_category %}active{% endif %}">
-            Tất cả
-          </a>
-        </li>
-        {% for c in categories %}
-        <li class="nav-item">
-          <a href="{% url 'category_products' c.slug %}"
-             class="nav-link px-3 {% if current_category == c.slug %}active{% endif %}">
-            {{ c.name }}
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
+{% if request.resolver_match.url_name != 'login' and request.resolver_match.url_name != 'register' and request.resolver_match.url_name != 'user_profile' and request.resolver_match.url_name != 'user_profile_edit' and request.resolver_match.url_name != 'product_detail' and request.resolver_match.url_name != 'cart' and request.resolver_match.url_name != 'checkout' and request.resolver_match.url_name != 'order_tracking' and request.resolver_match.url_name != 'admin_user_list' and request.resolver_match.url_name != 'admin_order_list' and not user.is_superuser %}
+
+<!-- Banner (Carousel) -->
+<div id="carouselBanner" class="carousel slide mt-3" data-bs-ride="carousel">
+  <div class="carousel-inner rounded shadow-sm">
+    <div class="carousel-item active">
+      <img src="https://png.pngtree.com/thumb_back/fw800/background/20251009/pngtree-makeup-brushes-and-cosmetics-flat-lay-image_19787470.webp"
+           class="d-block w-100"
+           alt="Banner 1">
     </div>
-  </nav>
-
-  <!-- Nội dung chính -->
-  <div class="container mt-4 mb-5">
-    {% block content %}{% endblock %}
+    <div class="carousel-item">
+      <img src="https://png.pngtree.com/thumb_back/fw800/background/20251009/pngtree-makeup-brushes-and-cosmetics-flat-lay-image_19787470.webp"
+           class="d-block w-100"
+           alt="Banner 2">
+    </div>
+    <div class="carousel-item">
+      <img src="https://png.pngtree.com/thumb_back/fw800/background/20251009/pngtree-makeup-brushes-and-cosmetics-flat-lay-image_19787470.webp"
+           class="d-block w-100"
+           alt="Banner 3">
+    </div>
   </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselBanner" data-bs-slide="prev" aria-label="Previous">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselBanner" data-bs-slide="next" aria-label="Next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </button>
+</div>
+{% endif %}
 
-  <!-- Footer -->
-  <footer class="text-center">
-    <div class="container">
-      <p class="mb-0">© 2025 E-Shop. All rights reserved.</p>
+<!-- Nội dung chính -->
+<div class="container mt-4 mb-5">
+  {% block content %}{% endblock %}
+</div>
+
+<!-- Redesigned Footer -->
+<footer>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <!-- Logo & Description -->
+      <div class="col">
+        <h2 > YOUNGBEAUTY</h2>
+        <p>Vẻ đẹp bắt đầu từ sự trẻ trung</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col">
+        <h3 ">Liên kết nhanh</h3>
+        <ul>
+          <li><a href="{% url 'shop:home' %}">Trang chủ</a></li>
+          <li><a href="#">Sản phẩm</a></li>
+         
+        </ul>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="col">
+        <h3>Thông tin liên hệ</h3>
+        <p>Địa chỉ: 33 Xô Viết Nghệ TĨnh, Đà Nẵng</p>
+        <p>Điện thoại: 0937830262</p>
+        <p>Email: support@vandinhtechnology.vn</p>
+      </div>
+
+      <!-- Newsletter & Social -->
+      <div class="col">
+        <h3>Bản đồ</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1475.8131734809022!2d108.22241871076486!3d16.032165235494077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314218389cf02c2b%3A0xbdc63233587e2d88!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyDEkMO0bmcgw4E!5e1!3m2!1svi!2s!4v1746979697589!5m2!1svi!2s" width="300" height="225" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="social-links mt-3">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
+  <div class="copyright">
+    © 2025  YOUNGBEAUTY
+     . All rights reserved.
+  </div>
+</footer>
 
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FontAwesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 from pathlib import Path
+import dj_database_url
 import os
 from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -137,3 +138,8 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT'),
     }
  }
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
+}

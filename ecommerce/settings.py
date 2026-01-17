@@ -1,21 +1,31 @@
 from pathlib import Path
-import dj_database_url
 import os
-from dotenv import load_dotenv
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import dj_database_url
+
+# =========================
+# BASE
+# =========================
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
-DEBUG = False
 
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'unsafe-secret')
-DEBUG = os.environ.get('DEBUG') == 'True'
-SECRET_KEY = 'django-insecure-@rv6jw!0t&85@ct^33r03xhg*vwe^ji=ts0ow5st6zq-7g=_)f'
-DEBUG = True
-ALLOWED_HOSTS = []
+# =========================
+# SECURITY
+# =========================
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'unsafe-secret-key'
+)
 
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
+ALLOWED_HOSTS = [
+    '.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
+
+# =========================
+# APPLICATIONS
+# =========================
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,14 +34,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+
+    # Local apps
     'shop',
     'accounts',
     'payments',
 ]
 
-
+# =========================
+# MIDDLEWARE
+# =========================
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -40,14 +56,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
+# =========================
+# URLS / WSGI
+# =========================
 ROOT_URLCONF = 'ecommerce.urls'
 
+WSGI_APPLICATION = 'ecommerce.wsgi.application'
+
+# =========================
+# TEMPLATES
+# =========================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # Chỉ định một lần đúng thư mục chứa templates chung
-        'DIRS': [ BASE_DIR / 'templates' ],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -61,101 +83,76 @@ TEMPLATES = [
     },
 ]
 
-
-WSGI_APPLICATION = 'ecommerce.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# =========================
+# DATABASE
+# =========================
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+    )
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
-
+# =========================
+# PASSWORD VALIDATION
+# =========================
 AUTH_PASSWORD_VALIDATORS = [
-    { 'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', },
-    { 'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', },
-    { 'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
-    { 'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
+# =========================
+# INTERNATIONALIZATION
+# =========================
 LANGUAGE_CODE = 'en-us'
+
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
+
 USE_I18N = True
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+# =========================
+# STATIC FILES
+# =========================
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [ BASE_DIR / 'static' ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Media (upload)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# =========================
+# MEDIA FILES
+# =========================
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-
-# Default primary key field type
+# =========================
+# AUTH
+# =========================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/products/'
-# Sau cùng của file settings.py
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'login'         
 LOGIN_REDIRECT_URL = '/admin/products/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
-
-
+# =========================
+# PAYMENT CONFIG (NÊN DÙNG ENV Ở PROD)
+# =========================
 PAYMENT_CONFIG = {
-    "CLIENT_ID": "7eefa141-d3e4-4f92-a1bf-eaa6e7081a75",
-    "API_KEY": "b1841452-8e97-4ccd-9897-0004a5c47f3a",
-    "CHECKSUM_KEY": "f9a45bbd9e5143e09304f066741ccdc9c17b47bd618",
-    "BASE_URL": "https://sandbox.example.com/api/payment",  # đổi sang URL thật theo docs của cổng
-    "WEBHOOK_URL": "http://127.0.0.1:8000/payments/webhook/",  # local callback
+    "CLIENT_ID": os.environ.get("PAYOS_CLIENT_ID", ""),
+    "API_KEY": os.environ.get("PAYOS_API_KEY", ""),
+    "CHECKSUM_KEY": os.environ.get("PAYOS_CHECKSUM_KEY", ""),
+    "BASE_URL": "https://sandbox.example.com/api/payment",
+    "WEBHOOK_URL": "https://your-app.onrender.com/payments/webhook/",
 }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PORT': os.environ.get('DB_PORT'),
-    }
- }
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
-    )
-}
-ALLOWED_HOSTS = ['*']
-
-INSTALLED_APPS = [
-    'django.contrib.staticfiles',
-    ...
-]
-
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    ...
-]
-
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'

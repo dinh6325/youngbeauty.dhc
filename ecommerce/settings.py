@@ -143,3 +143,18 @@ DATABASES = {
         default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
     )
 }
+ALLOWED_HOSTS = ['*']
+
+INSTALLED_APPS = [
+    'django.contrib.staticfiles',
+    ...
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    ...
+]
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'

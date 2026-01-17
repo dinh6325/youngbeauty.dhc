@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: store-pc
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn ecommerce.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        value: "mã bí mật của bạn trong settings.py"
+      - key: ALLOWED_HOSTS
+        value: "store-pc.onrender.com"

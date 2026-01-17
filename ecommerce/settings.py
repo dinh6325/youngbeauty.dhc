@@ -9,7 +9,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 DEBUG = False
 
-
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'unsafe-secret')
+DEBUG = os.environ.get('DEBUG') == 'True'
 SECRET_KEY = 'django-insecure-@rv6jw!0t&85@ct^33r03xhg*vwe^ji=ts0ow5st6zq-7g=_)f'
 DEBUG = True
 ALLOWED_HOSTS = []

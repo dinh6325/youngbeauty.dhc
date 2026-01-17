@@ -11,39 +11,39 @@
       "price": "259000.00",
       "stock": 100,
       "rating": 4.6,
-      "image": "products/anh8.jpg"
+      "image": "https://img.kwcdn.com/product/fancy/b18f1c4b-d913-46be-9040-c7fd502fa719.jpg?imageView2/2/w/800/q/70/format/avif"
     }
   },
   {
-  "model": "shop.product",
-  "pk": 2,
-  "fields": {
-    "created_at": "2025-04-25T07:00:00Z",
-    "category": 4,
-    "name": "Cọ Phủ Phấn Sợi Nhân Tạo Cao Cấp",
-    "slug": "co-phu-phan-soi-nhan-tao",
-    "description": "<strong>Cọ Phủ Phấn Sợi Nhân Tạo Cao Cấp</strong><br><br>Cọ phủ phấn được thiết kế chuyên dụng để phủ phấn bột và phấn nén, giúp lớp nền mịn màng, tự nhiên và đều màu.<br><br><strong>Đặc điểm nổi bật</strong><br><ul><li>Lông cọ sợi nhân tạo cao cấp, mềm mịn, tán phấn đều và không gây kích ứng da</li><li>Đầu cọ to, xòe đều, giúp kiểm soát lượng phấn tốt hơn</li><li>Không gây rơi phấn, hạn chế mốc nền</li><li>Dễ vệ sinh, nhanh khô, độ bền cao</li></ul><strong>Công dụng</strong><br><ul><li>Phủ phấn bột, phấn nén</li><li>Hoàn thiện lớp nền trang điểm</li></ul><strong>Đối tượng sử dụng</strong><br>Phù hợp cho người mới trang điểm và người trang điểm chuyên nghiệp",
-    "price": "70000.00",
-    "stock": 150,
-    "rating": 4.6,
-    "image": "products/Anh3.jpg"
-  }
-},
+    "model": "shop.product",
+    "pk": 2,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 4,
+      "name": "Cọ Phủ Phấn Sợi Nhân Tạo Cao Cấp",
+      "slug": "co-phu-phan-soi-nhan-tao",
+      "description": "<strong>Cọ Phủ Phấn Sợi Nhân Tạo Cao Cấp</strong><br><br>Cọ phủ phấn được thiết kế chuyên dụng để phủ phấn bột và phấn nén, giúp lớp nền mịn màng, tự nhiên và đều màu.<br><br><strong>Đặc điểm nổi bật</strong><br><ul><li>Lông cọ sợi nhân tạo cao cấp, mềm mịn, tán phấn đều và không gây kích ứng da</li><li>Đầu cọ to, xòe đều, giúp kiểm soát lượng phấn tốt hơn</li><li>Không gây rơi phấn, hạn chế mốc nền</li><li>Dễ vệ sinh, nhanh khô, độ bền cao</li></ul><strong>Công dụng</strong><br><ul><li>Phủ phấn bột, phấn nén</li><li>Hoàn thiện lớp nền trang điểm</li></ul><strong>Đối tượng sử dụng</strong><br>Phù hợp cho người mới trang điểm và người trang điểm chuyên nghiệp",
+      "price": "70000.00",
+      "stock": 150,
+      "rating": 4.6,
+      "image": "https://i.ibb.co/9mW84QC7/anh11.jpg"
+    }
+  },
   {
-  "model": "shop.product",
-  "pk": 3,
-  "fields": {
-    "created_at": "2025-04-25T07:00:00Z",
-    "category": 4,
-    "name": "Cọ Tán Phấn Mắt Sợi Nhân Tạo Cao Cấp",
-    "slug": "co-tan-phan-mat-soi-nhan-tao",
-    "description": "<strong>Cọ Tán Phấn Mắt Sợi Nhân Tạo Cao Cấp</strong><br><br>Cọ tán phấn mắt được thiết kế chuyên dụng giúp tán màu đều, mịn và dễ kiểm soát, hỗ trợ tạo lớp trang điểm mắt tự nhiên đến sắc nét.<br><br><strong>Ưu điểm nổi bật</strong><br><ul><li>Lông cọ sợi nhân tạo cao cấp, mềm mịn, không gây kích ứng vùng da mắt</li><li>Bám phấn tốt, giúp lên màu chuẩn và đều</li><li>Đầu cọ nhỏ gọn, dễ thao tác ở bầu mắt và hốc mắt</li><li>Ít rụng lông, dễ vệ sinh, nhanh khô</li></ul><strong>Công dụng</strong><br><ul><li>Tán phấn mắt dạng bột, dạng nén</li><li>Phù hợp đánh màu nền, tán màu chuyển và làm mờ viền mắt</li></ul><strong>Đối tượng sử dụng</strong><br>Người mới học trang điểm và người trang điểm chuyên nghiệp",
-    "price": "35000.00",
-    "stock": 150,
-    "rating": 4.4,
-    "image": "products/Anh4.jpg"
-  }
-},
+    "model": "shop.product",
+    "pk": 3,
+    "fields": {
+      "created_at": "2025-04-25T07:00:00Z",
+      "category": 4,
+      "name": "Cọ Tán Phấn Mắt Sợi Nhân Tạo Cao Cấp",
+      "slug": "co-tan-phan-mat-soi-nhan-tao",
+      "description": "<strong>Cọ Tán Phấn Mắt Sợi Nhân Tạo Cao Cấp</strong><br><br>Cọ tán phấn mắt được thiết kế chuyên dụng giúp tán màu đều, mịn và dễ kiểm soát, hỗ trợ tạo lớp trang điểm mắt tự nhiên đến sắc nét.<br><br><strong>Ưu điểm nổi bật</strong><br><ul><li>Lông cọ sợi nhân tạo cao cấp, mềm mịn, không gây kích ứng vùng da mắt</li><li>Bám phấn tốt, giúp lên màu chuẩn và đều</li><li>Đầu cọ nhỏ gọn, dễ thao tác ở bầu mắt và hốc mắt</li><li>Ít rụng lông, dễ vệ sinh, nhanh khô</li></ul><strong>Công dụng</strong><br><ul><li>Tán phấn mắt dạng bột, dạng nén</li><li>Phù hợp đánh màu nền, tán màu chuyển và làm mờ viền mắt</li></ul><strong>Đối tượng sử dụng</strong><br>Người mới học trang điểm và người trang điểm chuyên nghiệp",
+      "price": "35000.00",
+      "stock": 150,
+      "rating": 4.4,
+      "image": "https://i.ibb.co/Kptdx1Sc/Anh4.jpg"
+    }
+  },
   {
     "model": "shop.product",
     "pk": 4,
@@ -56,7 +56,7 @@
       "price": "259000.00",
       "stock": 50,
       "rating": 4.7,
-      "image": "products/Anh2.jpg"
+      "image": "https://i.ibb.co/hRHqHYPL/Anh2.jpg"
     }
   }
-] 
+]

@@ -144,7 +144,7 @@
     {% for p in products %}
       <div class="col-md-4 mb-4">
         <div class="card h-100">
-          {% if p.image %}<img src="{{ p.image.url }}" class="card-img-top">{% endif %}
+          {% if p.image %}<img src="{{ p.image }}" class="card-img-top">{% endif %}
           <div class="card-body">
             <h5>{{ p.name }}</h5>
             <p>{{ p.price|floatformat:0 }} ₫</p>

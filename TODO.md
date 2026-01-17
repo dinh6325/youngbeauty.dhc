@@ -1,8 +1,9 @@
-# TODO: Add 2 Images to Product Detail View
+# TODO: Fix Product Image Display in Templates
 
-- [ ] Add image2 field to Product model in shop/models.py
-- [ ] Create migration for the new image2 field
-- [ ] Update ProductForm in shop/forms.py to include image2
-- [ ] Update product_detail.html to display two images
-- [ ] Run makemigrations and migrate
-- [ ] Test the product detail view
+## Steps to Complete:
+- [x] Edit shop/templates/shop/product_detail.html to use {{ product.image }} instead of {{ product.image.url }}
+- [x] Check shop/templates/shop/product_list.html for similar issues and fix if needed
+- [x] Check shop/templates/shop/home.html for similar issues and fix if needed
+- [x] Check shop/templates/shop/category_products.html for similar issues and fix if needed
+- [ ] Run python manage.py loaddata shop/fixtures/tech_products.json to test loading data
+- [ ] Verify that images display correctly in templates after changes

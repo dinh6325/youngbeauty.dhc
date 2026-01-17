@@ -9,7 +9,7 @@
       <!-- Ảnh sản phẩm -->
       <div class="col-md-6 text-center">
         {% if product.image %}
-          <img src="{{ product.image.url }}" class="img-fluid product-img" alt="{{ product.name }}">
+          <img src="{{ product.image }}" class="img-fluid product-img" alt="{{ product.name }}">
         {% else %}
           <img src="https://via.placeholder.com/600x600?text=No+Image" class="img-fluid product-img" alt="No image">
         {% endif %}

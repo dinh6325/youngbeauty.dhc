@@ -24,7 +24,7 @@ class Product(models.Model):
     slug        = models.SlugField(unique=True, blank=True)
     description = models.TextField(blank=True)
     price       = models.DecimalField(max_digits=10, decimal_places=2)
-    image       = models.ImageField(upload_to='Products/', blank=True, null=True)
+    image       = models.URLField(max_length=500, blank=True, null=True)
     created_at  = models.DateTimeField(auto_now_add=True)
     stock       = models.IntegerField(default=0)
     rating      = models.FloatField(default=0.0)

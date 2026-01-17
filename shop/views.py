@@ -80,6 +80,7 @@ def home(request):
             pass
 
     # Pagination
+    qs = qs.order_by('id')  # Ensure queryset is ordered for pagination
     paginator = Paginator(qs, 12)  # 12 products per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

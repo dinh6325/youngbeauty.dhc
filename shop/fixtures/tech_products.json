@@ -4,130 +4,59 @@
     "pk": 1,
     "fields": {
       "created_at": "2025-04-25T07:00:00Z",
-      "category": 1,
-      "name": "Son Dior Addict Lip Glow",
-      "slug": "son-dior-addict-lip-glow",
-      "description": "Son dưỡng có màu cao cấp từ Dior, giúp môi căng mọng, mềm mịn và lên màu tự nhiên theo độ pH của môi. Công thức giàu dưỡng chất giúp nuôi dưỡng môi suốt cả ngày, hạn chế khô nứt và mang lại vẻ tươi tắn, rạng rỡ.",
-      "price": "850000.00",
-      "stock": 20,
-      "rating": 4.8,
-      "image": "products/Anh1.jpg"
+      "category": 4,
+      "name": "Bộ 4 Mút Trang Điểm Hình Giọt Nước Siêu Mềm Mịn – Kèm Hộp Đựng",
+      "slug": "bo-4-mut-trang-diem-giot-nuoc",
+      "description": "<strong>Bộ 4 Mút Trang Điểm Hình Giọt Nước – Kèm Hộp Đựng</strong><br><br>Sản phẩm phù hợp cho mọi loại da, đặc biệt an toàn cho da nhạy cảm. Chất mút siêu mềm mịn, có độ đàn hồi cao, giúp tán nền đều và tự nhiên.<br><br><strong>Ưu điểm nổi bật</strong><br><ul><li>Chất mút mềm mịn, đàn hồi tốt, không gây kích ứng</li><li>Thiết kế hình giọt nước đa năng, dễ sử dụng cho nhiều vùng trên khuôn mặt</li><li>Kèm hộp đựng tiện lợi, đảm bảo vệ sinh khi mang theo</li></ul><strong>Công dụng</strong><br><ul><li><strong>Đầu tròn:</strong> Tán kem nền, cushion, che khuyết điểm ở trán, má, cằm</li><li><strong>Đầu nhọn:</strong> Tán chi tiết vùng cánh mũi, bọng mắt, khóe miệng</li></ul><strong>Thông tin sản phẩm</strong><br><strong>Kích thước:</strong> 60 x 40 mm<br><strong>Màu sắc:</strong> Pastel nhẹ nhàng (như hình)<br><strong>Quy cách:</strong> Bộ 4 mút + hộp đựng",
+      "price": "259000.00",
+      "stock": 100,
+      "rating": 4.6,
+      "image": "products/anh8.jpg"
     }
   },
   {
-    "model": "shop.product",
-    "pk": 2,
-    "fields": {
+  "model": "shop.product",
+  "pk": 2,
+  "fields": {
     "created_at": "2025-04-25T07:00:00Z",
     "category": 4,
-    "name": "Cọ Trang Điểm DHC",
-    "slug": "co-trang-diem-dhc",
-    "description": "Cọ trang điểm DHC được làm từ sợi lông mềm mịn cao cấp, giúp tán đều phấn nền, phấn phủ hoặc phấn má một cách tự nhiên. Thiết kế vừa tay, dễ sử dụng, không gây kích ứng da và phù hợp cho cả người mới bắt đầu lẫn trang điểm chuyên nghiệp.",
-    "price": "280000.00",
-    "stock": 35,
+    "name": "Cọ Phủ Phấn Sợi Nhân Tạo Cao Cấp",
+    "slug": "co-phu-phan-soi-nhan-tao",
+    "description": "<strong>Cọ Phủ Phấn Sợi Nhân Tạo Cao Cấp</strong><br><br>Cọ phủ phấn được thiết kế chuyên dụng để phủ phấn bột và phấn nén, giúp lớp nền mịn màng, tự nhiên và đều màu.<br><br><strong>Đặc điểm nổi bật</strong><br><ul><li>Lông cọ sợi nhân tạo cao cấp, mềm mịn, tán phấn đều và không gây kích ứng da</li><li>Đầu cọ to, xòe đều, giúp kiểm soát lượng phấn tốt hơn</li><li>Không gây rơi phấn, hạn chế mốc nền</li><li>Dễ vệ sinh, nhanh khô, độ bền cao</li></ul><strong>Công dụng</strong><br><ul><li>Phủ phấn bột, phấn nén</li><li>Hoàn thiện lớp nền trang điểm</li></ul><strong>Đối tượng sử dụng</strong><br>Phù hợp cho người mới trang điểm và người trang điểm chuyên nghiệp",
+    "price": "70000.00",
+    "stock": 150,
     "rating": 4.6,
-    "image": "products/Anh2.jpg"
-    }
-  },
+    "image": "products/Anh3.jpg"
+  }
+},
+  {
+  "model": "shop.product",
+  "pk": 3,
+  "fields": {
+    "created_at": "2025-04-25T07:00:00Z",
+    "category": 4,
+    "name": "Cọ Tán Phấn Mắt Sợi Nhân Tạo Cao Cấp",
+    "slug": "co-tan-phan-mat-soi-nhan-tao",
+    "description": "<strong>Cọ Tán Phấn Mắt Sợi Nhân Tạo Cao Cấp</strong><br><br>Cọ tán phấn mắt được thiết kế chuyên dụng giúp tán màu đều, mịn và dễ kiểm soát, hỗ trợ tạo lớp trang điểm mắt tự nhiên đến sắc nét.<br><br><strong>Ưu điểm nổi bật</strong><br><ul><li>Lông cọ sợi nhân tạo cao cấp, mềm mịn, không gây kích ứng vùng da mắt</li><li>Bám phấn tốt, giúp lên màu chuẩn và đều</li><li>Đầu cọ nhỏ gọn, dễ thao tác ở bầu mắt và hốc mắt</li><li>Ít rụng lông, dễ vệ sinh, nhanh khô</li></ul><strong>Công dụng</strong><br><ul><li>Tán phấn mắt dạng bột, dạng nén</li><li>Phù hợp đánh màu nền, tán màu chuyển và làm mờ viền mắt</li></ul><strong>Đối tượng sử dụng</strong><br>Người mới học trang điểm và người trang điểm chuyên nghiệp",
+    "price": "35000.00",
+    "stock": 150,
+    "rating": 4.4,
+    "image": "products/Anh4.jpg"
+  }
+},
   {
     "model": "shop.product",
-    "pk": 3,
-    "fields": {
-      "created_at": "2025-04-25T07:00:00Z",
-      "category": 2,
-      "name": "Kem nền L'Oréal Infallible",
-      "slug": "kem-nen-loreal-infallible",
-      "description": "Kem nền L'Oréal Infallible với khả năng che phủ cao, giúp làm đều màu da và che khuyết điểm hiệu quả. Kết cấu mỏng nhẹ, bền màu suốt nhiều giờ, phù hợp cho cả trang điểm hằng ngày và những dịp cần lớp nền lâu trôi.",
-      "price": "380000.00",
-      "stock": 25,
-      "rating": 4.5,
-      "image": "products/kem-nen-loreal-infallible.jpeg"
-    }
-  },
-  {
-    "model": "shop.product", 
     "pk": 4,
-     "fields": { "created_at": "2025-04-25T07:00:00Z", 
-     "category": 1, "name": "Son Black Rouge Air Fit Velvet Tint", 
-     "slug": "son-black-rouge-air-fit-velvet", 
-     "description": "Son kem lì Black Rouge với chất son mịn như nhung, dễ tán và bám màu tốt. Màu sắc trẻ trung, thời thượng, phù hợp sử dụng hằng ngày. Khi lên môi tạo hiệu ứng nhẹ nhàng, không gây khô hay nặng môi.", 
-     "price": "280000.00", 
-     "stock": 35, "rating": 4.6,
-      "image": "products/Son Black Rouge.jpg" }
-  },
-  {
-    "model": "shop.product",
-    "pk": 5,
-    "fields": {
-      "created_at": "2025-04-25T07:00:00Z",
-      "category": 3,
-      "name": "Phấn phủ Laura Mercier",
-      "slug": "phan-phu-laura-mercier",
-      "description": "Phấn phủ không màu Laura Mercier nổi tiếng với khả năng kiềm dầu và giữ lớp nền lâu trôi. Kết cấu mịn nhẹ, không gây nặng mặt, giúp lớp trang điểm trông tự nhiên và bền đẹp suốt cả ngày.",
-      "price": "950000.00",
-      "stock": 15,
-      "rating": 4.9,
-      "image": "products/phan-phu-laura-mercier.jpg"
-    }
-  },
-  {
-    "model": "shop.product",
-    "pk": 6,
-    "fields": {
-      "created_at": "2025-04-25T07:00:00Z",
-      "category": 3,
-      "name": "Cushion April Skin Magic Snow",
-      "slug": "cushion-april-skin-magic-snow",
-      "description": "Phấn nước April Skin Magic Snow với độ che phủ tốt, giúp nâng tông da tự nhiên và mang lại làn da mịn màng. Dễ dàng dặm lại trong ngày, phù hợp cho phong cách trang điểm trong trẻo, nhẹ nhàng.",
-      "price": "590000.00",
-      "stock": 20,
-      "rating": 4.5,
-      "image": "products/cushion-april-skin-magic-snow.jpg"
-    }
-  },
-  {
-    "model": "shop.product",
-    "pk": 7,
     "fields": {
       "created_at": "2025-04-25T07:00:00Z",
       "category": 4,
-      "name": "Mascara Kiss Me Heroine Make",
-      "slug": "mascara-kiss-me-heroine-make",
-      "description": "Mascara Kiss Me Heroine Make nổi bật với khả năng chống nước vượt trội, giúp mi cong và dài rõ rệt. Giữ nếp mi suốt nhiều giờ liền, phù hợp cho cả ngày dài hoạt động mà không lo lem trôi.",
-      "price": "320000.00",
-      "stock": 28,
-      "rating": 4.8,
-      "image": "products/mascara-kiss-me-heroine-make.jpeg"
-    }
-  },
-  {
-    "model": "shop.product",
-    "pk": 8,
-    "fields": {
-      "created_at": "2025-04-25T07:00:00Z",
-      "category": 4,
-      "name": "Bút kẻ mày Innisfree Auto Eyebrow",
-      "slug": "but-ke-may-innisfree-auto",
-      "description": "Chì kẻ mày Innisfree Auto Eyebrow có thiết kế tiện lợi, dễ sử dụng ngay cả với người mới bắt đầu. Màu sắc tự nhiên, giúp định hình chân mày hài hòa với khuôn mặt mà không bị quá đậm.",
-      "price": "150000.00",
-      "stock": 40,
-      "rating": 4.4,
-      "image": "products/but-ke-may-innisfree-auto.jpg"
-    }
-  },
-  {
-    "model": "shop.product",
-    "pk": 9,
-    "fields": {
-      "created_at": "2025-04-25T07:00:00Z",
-      "category": 5,
-      "name": "Phấn tạo khối Too Cool For School",
-      "slug": "phan-tao-khoi-too-cool-for-school",
-      "description": "Phấn tạo khối Too Cool For School giúp gương mặt trông thon gọn và sắc nét hơn. Chất phấn mịn, dễ tán, tạo hiệu ứng tự nhiên, phù hợp cho cả trang điểm hằng ngày lẫn các dịp đặc biệt.",
-      "price": "380000.00",
-      "stock": 22,
-      "rating": 4.6,
-      "image": "products/phan-tao-khoi-too-cool-for-school.webp"
+      "name": "Bộ Cọ Trang Điểm Thiên Nhiên – Cán Tre, Lông Sợi Nhân Tạo Cao Cấp",
+      "slug": "bo-co-trang-diem-thien-nhien-can-tre",
+      "description": "<strong>Bộ Cọ Trang Điểm Thiên Nhiên – Cán Tre, Lông Sợi Nhân Tạo Cao Cấp</strong><br><br>Bộ cọ được thiết kế theo phong cách thiên nhiên – thân thiện môi trường, mang đến trải nghiệm trang điểm nhẹ nhàng, an toàn và bền vững.<br><br><strong>Đặc điểm nổi bật</strong><br><ul><li>Lông cọ sợi nhân tạo cao cấp, mềm mịn, đàn hồi tốt, không gây kích ứng</li><li>Cán cọ tre tự nhiên, nhẹ tay, chắc chắn, dễ cầm nắm</li><li>Thiết kế tinh giản, hiện đại, phù hợp cho cá nhân và trang điểm chuyên nghiệp</li><li>Sợi cọ bền, ít rụng, dễ vệ sinh</li></ul><strong>Công dụng</strong><br><ul><li>Trang điểm nền, phấn phủ</li><li>Tạo khối, đánh má hồng</li><li>Trang điểm mắt và môi</li></ul><strong>Thông tin sản phẩm</strong><br><strong>Chất liệu lông cọ:</strong> Sợi nhân tạo<br><strong>Chất liệu cán:</strong> Tre tự nhiên<br><strong>Phong cách:</strong> Thiên nhiên – thân thiện môi trường<br><strong>Tình trạng:</strong> Mới 100%",
+      "price": "259000.00",
+      "stock": 50,
+      "rating": 4.7,
+      "image": "products/Anh2.jpg"
     }
   }
-]
+] 
